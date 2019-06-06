@@ -1,0 +1,971 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+        xmlns:gco="http://standards.iso.org/iso/19115/-3/gco/1.0" 
+        xmlns:cit="http://standards.iso.org/iso/19115/-3/cit/2.0" 
+        xmlns:delwp="https://github.com/geonetwork-delwp/iso19115-3.2018" 
+        xmlns:mcc="http://standards.iso.org/iso/19115/-3/mcc/1.0" 
+        xmlns:mrd="http://standards.iso.org/iso/19115/-3/mrd/1.0" 
+        elementFormDefault="qualified" 
+        targetNamespace="https://github.com/geonetwork-delwp/iso19115-3.2018" 
+        version="1.0">
+  <import namespace="http://standards.iso.org/iso/19115/-3/gco/1.0" schemaLocation="https://schemas.isotc211.org/19115/-3/gco/1.0/gco.xsd"/>
+  <import namespace="http://standards.iso.org/iso/19115/-3/cit/2.0" schemaLocation="https://schemas.isotc211.org/19115/-3/cit/2.0/cit.xsd"/>
+  <import namespace="http://standards.iso.org/iso/19115/-3/mrd/1.0" schemaLocation="https://schemas.isotc211.org/19115/-3/mrd/1.0/mrd.xsd"/>
+
+<!-- A gco:Record type that can be used as a child of elements
+     such as mac:otherProperty 
+
+     eg. for projects:
+
+<mdb:acquistionInformation>
+  <mac:MI_AcquisitionInformation>
+    <mac:operation>
+      <mac:MI_Operation>
+        ...
+        <mac:otherProperty>
+         <gco:Record xsi:type="delwp:MD_OperationProperties_Type">
+           <delwp:projectDetails>
+             <delwp:MD_ProjectDetails>
+               <delwp:method>
+                 <delwp:MD_MethodCode @codeListValue="Not Entered"/>
+               </delwp:method>
+               <delwp:projectPartner>
+                 <delwp:MD_ProjectPartner>
+                      <delwp:partner>
+                      </delwp:partner>
+                      <delwp:purpose>
+                        <gco:CharacterString>Photogrammetry project</gco:CharacterString>
+                      </delwp:purpose>
+                 </delwp:MD_ProjectPartner>
+               </delwp:projectPartner> 
+             </delwp:MD_ProjectDetails>
+           </delwp:projectDetails>
+         </gco:Record>
+        </mac:otherProperty>
+      </mac:MI_Operation>
+    </mac:operation>
+  </mac:MI_AcquisitionInformation>
+</mdb:acquistionInformation>
+
+     eg. for raster datasets:
+
+<mdb:acquistionInformation>
+  <mac:MI_AcquisitionInformation>
+    <mac:operation>
+      <mac:MI_Operation>
+        ...
+        <mac:otherProperty>
+         <gco:Record xsi:type="delwp:MD_OperationProperties_Type">
+           <delwp:datasetDetails>
+             <delwp:MD_DatasetDetails>
+               <delwp:platformType>
+                 <delwp:MD_PlatormTypeCode @codeListValue="..."/>
+               </delwp:platformType>
+               <delwp:assembly>
+                 <delwp:MD_AssemblyCode @codeListValue="..."/>
+               </delwp:assembly>
+               <delwp:tileSize>
+                 <delwp:MD_TileSizeCode @codeListValue="..."/>
+               </delwp:tileSize>
+               <delwp:dataDetails>
+                 <delwp:MD_DataDetails>
+                   <delwp:rasterDetails>
+                     <delwp:MD_RasterDetails>
+                         
+                     </delwp:MD_RasterDetails>
+                   </delwp:rasterDetails>
+                 </delwp:MD_DataDetails>
+               </delwp:dataDetails>
+             </delwp:MD_DatasetDetails>
+           </delwp:datasetDetails>
+         </gco:Record>
+        </mac:otherProperty>
+      </mac:MI_Operation>
+    </mac:operation>
+  </mac:MI_AcquisitionInformation>
+</mdb:acquistionInformation>
+
+
+
+-->
+
+  <element name="MD_RasterTypeCode" substitutionGroup="gco:CharacterString" type="gco:CodeListValue_Type"/>
+
+  <complexType name="MD_RasterTypeCode_PropertyType">
+    <sequence minOccurs="0">
+      <element ref="delwp:MD_RasterTypeCode"/>
+    </sequence>
+    <attribute ref="gco:nilReason"/>
+  </complexType>
+
+  <!-- MD_ProjectDetails -->
+
+  <element name="MD_ProjectDetails" substitutionGroup="gco:AbstractObject" type="delwp:MD_ProjectDetails_Type"/>
+
+  <complexType name="MD_ProjectDetails_PropertyType">
+    <sequence minOccurs="0">
+      <element ref="delwp:MD_ProjectDetails"/>
+    </sequence>
+    <attributeGroup ref="gco:ObjectReference"/>
+    <attribute ref="gco:nilReason"/>
+  </complexType>
+
+  <element name="MD_MethodCode" substitutionGroup="gco:CharacterString" type="gco:CodeListValue_Type">
+    <annotation>
+      <documentation>Description: Describes the method code used to collect the imagery in the project</documentation>
+    </annotation>
+  </element>
+
+  <complexType name="MD_MethodCode_PropertyType">
+    <sequence minOccurs="0">
+      <element ref="delwp:MD_MethodCode"/>
+    </sequence>
+    <attribute ref="gco:nilReason"/>
+  </complexType>
+
+  <complexType name="MD_ProjectDetails_Type">
+    <complexContent>
+      <extension base="gco:AbstractObject_Type">
+    <sequence minOccurs="0">
+      <element minOccurs="1" name="method" type="delwp:MD_MethodCode_PropertyType">
+        <annotation>
+          <documentation>Description: Describes the method used to acquire the imagery in the project</documentation>
+        </annotation>
+      </element>
+    </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <!-- END MD_ProjectDetails -->
+
+  <!-- MD_ContourDetails -->
+
+  <element name="MD_ContourDetails" substitutionGroup="gco:AbstractObject" type="delwp:MD_ContourDetails_Type"/>
+
+  <complexType name="MD_ContourDetails_PropertyType">
+    <sequence minOccurs="0">
+      <element ref="delwp:MD_ContourDetails"/>
+    </sequence>
+    <attributeGroup ref="gco:ObjectReference"/>
+    <attribute ref="gco:nilReason"/>
+  </complexType>
+
+  <complexType name="MD_ContourDetails_Type">
+    <complexContent>
+      <extension base="gco:AbstractObject_Type">
+    <sequence minOccurs="0">
+      <element minOccurs="1" name="interval" type="gco:Measure_PropertyType">
+        <annotation>
+          <documentation>Description: Contour interval</documentation>
+        </annotation>
+      </element>
+    </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <!-- END MD_ContourDetails -->
+
+  <!-- MD_PointCloudDetails -->
+
+  <element name="MD_PointCloudDetails" substitutionGroup="gco:AbstractObject" type="delwp:MD_PointCloudDetails_Type"/>
+
+  <complexType name="MD_PointCloudDetails_PropertyType">
+    <sequence minOccurs="0">
+      <element ref="delwp:MD_PointCloudDetails"/>
+    </sequence>
+    <attributeGroup ref="gco:ObjectReference"/>
+    <attribute ref="gco:nilReason"/>
+  </complexType>
+
+    <element name="MD_EllipsoidVerticalDatumCode" substitutionGroup="gco:CharacterString" type="gco:CodeListValue_Type"/>
+
+    <complexType name="MD_EllipsoidVerticalDatumCode_PropertyType">
+      <sequence minOccurs="0">
+        <element ref="delwp:MD_EllipsoidVerticalDatumCode"/>
+      </sequence>
+      <attribute ref="gco:nilReason"/>
+    </complexType>
+  
+    <element name="MD_EllipsoidFormatCode" substitutionGroup="gco:CharacterString" type="gco:CodeListValue_Type"/>
+  
+    <complexType name="MD_EllipsoidFormatCode_PropertyType">
+      <sequence minOccurs="0">
+        <element ref="delwp:MD_EllipsoidFormatCode"/>
+      </sequence>
+      <attribute ref="gco:nilReason"/>
+    </complexType>
+  
+    <element name="MD_GeoidVerticalDatumCode" substitutionGroup="gco:CharacterString" type="gco:CodeListValue_Type"/>
+
+    <complexType name="MD_GeoidVerticalDatumCode_PropertyType">
+      <sequence minOccurs="0">
+        <element ref="delwp:MD_GeoidVerticalDatumCode"/>
+      </sequence>
+      <attribute ref="gco:nilReason"/>
+    </complexType>
+  
+    <!-- BEGIN MD_Classification -->
+
+    <element name="MD_Classification" substitutionGroup="gco:AbstractObject" type="delwp:MD_Classification_Type"/>
+
+    <complexType name="MD_Classification_PropertyType">
+      <sequence minOccurs="0">
+        <element ref="delwp:MD_Classification"/>
+      </sequence>
+      <attributeGroup ref="gco:ObjectReference"/>
+      <attribute ref="gco:nilReason"/>
+    </complexType>
+  
+    <complexType name="MD_Classification_Type">
+      <complexContent>
+        <extension base="gco:AbstractObject_Type">
+      <sequence minOccurs="0">
+        <element minOccurs="1" name="classLevel" type="gco:Integer_PropertyType"/>
+        <element minOccurs="0" name="classAccuracy" type="gco:Real_PropertyType"/>
+        <element minOccurs="0" name="otherClass" type="gco:CharacterString_PropertyType"/>
+        <element minOccurs="1" name="class0" type="gco:Boolean_PropertyType"/>
+        <element minOccurs="1" name="class1" type="gco:Boolean_PropertyType"/>
+        <element minOccurs="1" name="class2" type="gco:Boolean_PropertyType"/>
+        <element minOccurs="1" name="class3" type="gco:Boolean_PropertyType"/>
+        <element minOccurs="1" name="class4" type="gco:Boolean_PropertyType"/>
+        <element minOccurs="1" name="class5" type="gco:Boolean_PropertyType"/>
+        <element minOccurs="1" name="class6" type="gco:Boolean_PropertyType"/>
+        <element minOccurs="1" name="class7" type="gco:Boolean_PropertyType"/>
+        <element minOccurs="1" name="class8" type="gco:Boolean_PropertyType"/>
+        <element minOccurs="1" name="class9" type="gco:Boolean_PropertyType"/>
+        <element minOccurs="1" name="class10" type="gco:Boolean_PropertyType"/>
+        <element minOccurs="1" name="class12" type="gco:Boolean_PropertyType"/>
+      </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+
+    <!-- END MD_Classification -->
+
+  
+  <complexType name="MD_PointCloudDetails_Type">
+    <complexContent>
+      <extension base="gco:AbstractObject_Type">
+    <sequence minOccurs="0">
+      <element minOccurs="0" name="pulseMode" type="gco:CharacterString_PropertyType">
+        <annotation>
+          <documentation>Description: Lidar details pulse mode</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="returnType" type="gco:CharacterString_PropertyType">
+        <annotation>
+          <documentation>Description: Lidar details return types</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="1" name="scanRate" type="gco:Measure_PropertyType">
+        <annotation>
+          <documentation>Description: Lidar details scan rate</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="1" name="scanFrequency" type="gco:Measure_PropertyType">
+        <annotation>
+          <documentation>Description: Lidar details scan frequency</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="scanAngle" type="gco:Measure_PropertyType">
+        <annotation>
+          <documentation>Description: Lidar details scan angle</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="1" name="footprintSize" type="gco:Measure_PropertyType">
+        <annotation>
+          <documentation>Description: Lidar details footprint size</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="pointDensityTarget" type="gco:Measure_PropertyType">
+        <annotation>
+          <documentation>Description: Lidar details point density target</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="1" name="pointDensityActual" type="gco:Measure_PropertyType">
+        <annotation>
+          <documentation>Description: Lidar details point density actual</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="pointSpacingTarget" type="gco:Measure_PropertyType">
+        <annotation>
+          <documentation>Description: Lidar details point spacing target</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="1" name="pointSpacingActual" type="gco:Measure_PropertyType">
+        <annotation>
+          <documentation>Description: Lidar details point spacing actual</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="1" name="ellipsoidProvided" type="gco:Boolean_PropertyType">
+        <annotation>
+          <documentation>Description: Lidar details ellipsoid provided</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="ellipsoidVerticalDatum" type="delwp:MD_EllipsoidVerticalDatumCode_PropertyType">
+        <annotation>
+          <documentation>Description: Describes the ellipsoid vertical datum</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="ellipsoidFormat" type="delwp:MD_EllipsoidFormatCode_PropertyType">
+        <annotation>
+          <documentation>Description: Describes the ellipsoid format</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="geoidVerticalDatum" type="delwp:MD_GeoidVerticalDatumCode_PropertyType">
+        <annotation>
+          <documentation>Description: Describes the geoid vertical datum</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="additionalAdjustments" type="gco:CharacterString_PropertyType">
+        <annotation>
+          <documentation>Description: Lidar details additional adjustments</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="environmentalConditions" type="gco:CharacterString_PropertyType">
+        <annotation>
+          <documentation>Description: Lidar details environmental conditions</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="tidalConditions" type="gco:CharacterString_PropertyType">
+        <annotation>
+          <documentation>Description: Lidar details tidal conditions</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="classification" type="delwp:MD_Classification_PropertyType">
+        <annotation>
+          <documentation>Description: Lidar classification details</documentation>
+        </annotation>
+      </element>
+    </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <!-- END MD_PointCloudDetails -->
+
+  <!-- MD_RasterDetails -->
+
+  <element name="MD_RasterDetails" substitutionGroup="gco:AbstractObject" type="delwp:MD_RasterDetails_Type"/>
+
+  <complexType name="MD_RasterDetails_PropertyType">
+    <sequence minOccurs="0">
+      <element ref="delwp:MD_RasterDetails"/>
+    </sequence>
+    <attributeGroup ref="gco:ObjectReference"/>
+    <attribute ref="gco:nilReason"/>
+  </complexType>
+
+    <!-- MD_RasterPlatformSpecificProperties -->
+
+    <element name="MD_RasterPlatformSpecificProperties" substitutionGroup="gco:AbstractObject" type="delwp:MD_RasterPlatformSpecificProperties_Type"/>
+
+    <complexType name="MD_RasterPlatformSpecificProperties_PropertyType">
+      <sequence minOccurs="0">
+        <element ref="delwp:MD_RasterPlatformSpecificProperties"/>
+      </sequence>
+      <attributeGroup ref="gco:ObjectReference"/>
+      <attribute ref="gco:nilReason"/>
+    </complexType>
+  
+    <!-- MD_AerialSurveyDetails -->
+
+    <element name="MD_AerialSurveyDetails" substitutionGroup="gco:AbstractObject" type="delwp:MD_AerialSurveyDetails_Type"/>
+
+    <complexType name="MD_AerialSurveyDetails_PropertyType">
+      <sequence minOccurs="0">
+        <element ref="delwp:MD_AerialSurveyDetails"/>
+      </sequence>
+      <attributeGroup ref="gco:ObjectReference"/>
+      <attribute ref="gco:nilReason"/>
+    </complexType>
+
+      <element name="MD_RunOrientationCode" substitutionGroup="gco:CharacterString" type="gco:CodeListValue_Type"/>
+
+      <complexType name="MD_RunOrientationCode_PropertyType">
+        <sequence minOccurs="0">
+          <element ref="delwp:MD_RunOrientationCode"/>
+        </sequence>
+        <attribute ref="gco:nilReason"/>
+      </complexType>
+    
+      <element name="MD_FlyingHeightUnitCode" substitutionGroup="gco:CharacterString" type="gco:CodeListValue_Type"/>
+    
+      <complexType name="MD_FlyingHeightUnitCode_PropertyType">
+        <sequence minOccurs="0">
+          <element ref="delwp:MD_FlyingHeightUnitCode"/>
+        </sequence>
+        <attribute ref="gco:nilReason"/>
+      </complexType>
+  
+    <complexType name="MD_AerialSurveyDetails_Type">
+      <complexContent>
+        <extension base="gco:AbstractObject_Type">
+      <sequence minOccurs="0">
+        <element minOccurs="0" name="runs" type="gco:Integer_PropertyType">
+          <annotation>
+            <documentation>Description: Number of runs</documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="runOrientation" type="delwp:MD_RunOrientationCode_PropertyType">
+          <annotation>
+            <documentation>Description: Run Orientation</documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="swathWidth" type="gco:Integer_PropertyType">
+          <annotation>
+            <documentation>Description: Swath Width</documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="sideOverlap" type="gco:Integer_PropertyType">
+          <annotation>
+            <documentation>Description: Side Overlap Percentage</documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="forwardOverlap" type="gco:Integer_PropertyType">
+          <annotation>
+            <documentation>Description: Forward Overlap Percentage</documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="flyingHeightUnit" type="delwp:MD_FlyingHeightUnitCode_PropertyType">
+          <annotation>
+            <documentation>Description: Flying Height Unit</documentation>
+          </annotation>
+        </element>
+        <element minOccurs="0" name="flightHeight" type="gco:Integer_PropertyType">
+          <annotation>
+            <documentation>Description: Flight Height</documentation>
+          </annotation>
+        </element>
+      </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+
+    <!-- END MD_AerialSurveyDetails -->
+
+    <!-- MD_AerialPhoto -->
+
+    <element name="MD_AerialPhoto" substitutionGroup="gco:AbstractObject" type="delwp:MD_AerialPhoto_Type"/>
+
+    <complexType name="MD_AerialPhoto_PropertyType">
+      <sequence minOccurs="0">
+        <element ref="delwp:MD_AerialPhoto"/>
+      </sequence>
+      <attributeGroup ref="gco:ObjectReference"/>
+      <attribute ref="gco:nilReason"/>
+    </complexType>
+  
+      <element name="MD_PhotoTypeCode" substitutionGroup="gco:CharacterString" type="gco:CodeListValue_Type"/>
+
+      <complexType name="MD_PhotoTypeCode_PropertyType">
+        <sequence minOccurs="0">
+          <element ref="delwp:MD_PhotoTypeCode"/>
+        </sequence>
+        <attribute ref="gco:nilReason"/>
+      </complexType>
+
+      <element name="MD_LensCode" substitutionGroup="gco:CharacterString" type="gco:CodeListValue_Type"/>
+
+      <complexType name="MD_LensCode_PropertyType">
+        <sequence minOccurs="0">
+          <element ref="delwp:MD_LensCode"/>
+        </sequence>
+        <attribute ref="gco:nilReason"/>
+      </complexType>
+
+    <complexType name="MD_AerialPhoto_Type">
+      <complexContent>
+        <extension base="gco:AbstractObject_Type">
+          <sequence minOccurs="0">
+            <element minOccurs="1" name="photoType" type="delwp:MD_PhotoTypeCode_PropertyType">
+              <annotation>
+                <documentation>Description: photo type</documentation>
+              </annotation>
+            </element>
+            <element minOccurs="0" name="filmNumber" type="gco:CharacterString_PropertyType">
+              <annotation>
+                <documentation>Description: film number</documentation>
+              </annotation>
+            </element>
+            <element minOccurs="1" name="lens" type="delwp:MD_LensCode_PropertyType">
+              <annotation>
+                <documentation>Description: lens</documentation>
+              </annotation>
+            </element>
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+  
+    <!-- END MD_AerialPhoto -->
+
+    <!-- MD_Satellite -->
+
+    <element name="MD_Satellite" substitutionGroup="gco:AbstractObject" type="delwp:MD_Satellite_Type"/>
+
+    <complexType name="MD_Satellite_PropertyType">
+      <sequence minOccurs="0">
+        <element ref="delwp:MD_Satellite"/>
+      </sequence>
+      <attributeGroup ref="gco:ObjectReference"/>
+      <attribute ref="gco:nilReason"/>
+    </complexType>
+
+      <element name="MD_AtmosphericCorrectionCode" substitutionGroup="gco:CharacterString" type="gco:CodeListValue_Type"/>
+
+      <complexType name="MD_AtmosphericCorrectionCode_PropertyType">
+        <sequence minOccurs="0">
+          <element ref="delwp:MD_AtmosphericCorrectionCode"/>
+        </sequence>
+        <attribute ref="gco:nilReason"/>
+      </complexType>
+
+      <element name="MD_ProcessingLevelCode" substitutionGroup="gco:CharacterString" type="gco:CodeListValue_Type"/>
+
+      <complexType name="MD_ProcessingLevelCode_PropertyType">
+        <sequence minOccurs="0">
+          <element ref="delwp:MD_ProcessingLevelCode"/>
+        </sequence>
+        <attribute ref="gco:nilReason"/>
+      </complexType>
+
+    <complexType name="MD_Satellite_Type">
+      <complexContent>
+        <extension base="gco:AbstractObject_Type">
+          <sequence minOccurs="0">
+            <element minOccurs="0" name="nadir" type="gco:Real_PropertyType">
+              <annotation>
+                <documentation>Description: nadir</documentation>
+              </annotation>
+            </element>
+            <element minOccurs="0" name="controlPoints" type="gco:CharacterString_PropertyType">
+              <annotation>
+                <documentation>Description: control points</documentation>
+              </annotation>
+            </element>
+            <element minOccurs="0" name="rawImageFormat" type="mrd:MD_Format_PropertyType">
+              <annotation>
+                <documentation>Description: raw image format</documentation>
+              </annotation>
+            </element>
+            <element minOccurs="0" name="rectifiedImageFormat" type="mrd:MD_Format_PropertyType">
+              <annotation>
+                <documentation>Description: raw image format</documentation>
+              </annotation>
+            </element>
+            <element minOccurs="0" name="unrectifiedImageFormat" type="mrd:MD_Format_PropertyType">
+              <annotation>
+                <documentation>Description: raw image format</documentation>
+              </annotation>
+            </element>
+            <element minOccurs="0" name="atmosphericCorrection" type="delwp:MD_AtmosphericCorrectionCode_PropertyType">
+              <annotation>
+                <documentation>Description: atmospheric correction code</documentation>
+              </annotation>
+            </element>
+            <element minOccurs="0" name="processingLevel" type="delwp:MD_ProcessingLevelCode_PropertyType">
+              <annotation>
+                <documentation>Description: processing level correction code</documentation>
+              </annotation>
+            </element>
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+
+    <!-- END MD_Satellite -->
+
+    <!-- MD_DEM -->
+
+    <element name="MD_DEM" substitutionGroup="gco:AbstractObject" type="delwp:MD_DEM_Type"/>
+
+    <complexType name="MD_DEM_PropertyType">
+      <sequence minOccurs="0">
+        <element ref="delwp:MD_DEM"/>
+      </sequence>
+      <attributeGroup ref="gco:ObjectReference"/>
+      <attribute ref="gco:nilReason"/>
+    </complexType>
+
+      <element name="MD_DEMCreatorCode" substitutionGroup="gco:CharacterString" type="gco:CodeListValue_Type"/>
+
+      <complexType name="MD_DEMCreatorCode_PropertyType">
+        <sequence minOccurs="0">
+          <element ref="delwp:MD_DEMCreatorCode"/>
+        </sequence>
+        <attribute ref="gco:nilReason"/>
+      </complexType>
+
+    <complexType name="MD_DEM_Type">
+      <complexContent>
+        <extension base="gco:AbstractObject_Type">
+          <sequence minOccurs="0">
+            <element minOccurs="0" name="demCreator" type="delwp:MD_DEMCreatorCode_PropertyType">
+              <annotation>
+                <documentation>Description: dem creator code</documentation>
+              </annotation>
+            </element>
+          </sequence>
+        </extension>
+      </complexContent>
+    </complexType>
+
+    <!-- END MD_DEM -->
+
+  <complexType name="MD_RasterPlatformSpecificProperties_Type">
+    <complexContent>
+      <extension base="gco:AbstractObject_Type">
+    <choice>
+      <element name="aerialPhoto" type="delwp:MD_AerialPhoto_PropertyType"/>
+      <element name="satellite" type="delwp:MD_Satellite_PropertyType"/>
+      <element name="dem" type="delwp:MD_DEM_PropertyType"/>
+    </choice>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <!-- END MD_RasterPlatformSpecificProperties -->
+
+  <element name="MD_ResamplingKernelCode" substitutionGroup="gco:CharacterString" type="gco:CodeListValue_Type"/>
+
+  <complexType name="MD_ResamplingKernelCode_PropertyType">
+    <sequence minOccurs="0">
+      <element ref="delwp:MD_ResamplingKernelCode"/>
+    </sequence>
+    <attribute ref="gco:nilReason"/>
+  </complexType>
+
+  <element name="MD_PlatformCode" substitutionGroup="gco:CharacterString" type="gco:CodeListValue_Type"/>
+
+  <complexType name="MD_PlatformCode_PropertyType">
+    <sequence minOccurs="0">
+      <element ref="delwp:MD_PlatformCode"/>
+    </sequence>
+    <attribute ref="gco:nilReason"/>
+  </complexType>
+
+  <element name="MD_BandListCode" substitutionGroup="gco:CharacterString" type="gco:CodeListValue_Type"/>
+
+  <complexType name="MD_BandListCode_PropertyType">
+    <sequence minOccurs="0">
+      <element ref="delwp:MD_BandListCode"/>
+    </sequence>
+    <attribute ref="gco:nilReason"/>
+  </complexType>
+
+  <element name="MD_RectificationTypeCode" substitutionGroup="gco:CharacterString" type="gco:CodeListValue_Type"/>
+
+  <complexType name="MD_RectificationTypeCode_PropertyType">
+    <sequence minOccurs="0">
+      <element ref="delwp:MD_RectificationTypeCode"/>
+    </sequence>
+    <attribute ref="gco:nilReason"/>
+  </complexType>
+
+  <element name="MD_SeamlessnessCode" substitutionGroup="gco:CharacterString" type="gco:CodeListValue_Type"/>
+
+  <complexType name="MD_SeamlessnessCode_PropertyType">
+    <sequence minOccurs="0">
+      <element ref="delwp:MD_SeamlessnessCode"/>
+    </sequence>
+    <attribute ref="gco:nilReason"/>
+  </complexType>
+
+  <complexType name="MD_RasterDetails_Type">
+    <complexContent>
+      <extension base="gco:AbstractObject_Type">
+    <sequence minOccurs="0">
+      <element minOccurs="1" name="type" type="delwp:MD_RasterTypeCode_PropertyType">
+        <annotation>
+          <documentation>Description: Describes the type of raster data eg. aerial photo</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="1" name="numberOfBands" type="gco:Integer_PropertyType">
+        <annotation>
+          <documentation>Description: rectification type</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="bandList" type="delwp:MD_BandListCode_PropertyType">
+        <annotation>
+          <documentation>Description: band list</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="resamplingKernel" type="delwp:MD_ResamplingKernelCode_PropertyType">
+        <annotation>
+          <documentation>Description: band list</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="1" name="platform" type="delwp:MD_PlatformCode_PropertyType">
+        <annotation>
+          <documentation>Description: platform code</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="seamlessness" type="delwp:MD_SeamlessnessCode_PropertyType">
+        <annotation>
+          <documentation>Description: Seamlessness</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="rectificationType" type="delwp:MD_RectificationTypeCode_PropertyType">
+        <annotation>
+          <documentation>Description: rectification type</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="rectificationNotes" type="gco:CharacterString_PropertyType">
+        <annotation>
+          <documentation>Description: rectification notes</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="1" name="rasterPlatformSpecificProperties" type="delwp:MD_RasterPlatformSpecificProperties_PropertyType">
+        <annotation>
+          <documentation>Description: satellite or aerial photo properties for raster datasets</documentation>
+        </annotation>
+      </element>
+    </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <!-- END MD_RasterDetails -->
+
+  <!-- MD_DataDetails -->
+
+  <element name="MD_DataDetails" substitutionGroup="gco:AbstractObject" type="delwp:MD_DataDetails_Type"/>
+
+  <complexType name="MD_DataDetails_PropertyType">
+    <sequence minOccurs="0">
+      <element ref="delwp:MD_DataDetails"/>
+    </sequence>
+    <attributeGroup ref="gco:ObjectReference"/>
+    <attribute ref="gco:nilReason"/>
+  </complexType>
+
+  <complexType name="MD_DataDetails_Type">
+    <complexContent>
+      <extension base="gco:AbstractObject_Type">
+    <choice>
+      <element name="rasterDetails" type="delwp:MD_RasterDetails_PropertyType"/>
+      <element name="pointCloudDetails" type="delwp:MD_PointCloudDetails_PropertyType"/>
+      <element name="contourDetails" type="delwp:MD_ContourDetails_PropertyType"/>
+    </choice>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <!-- END MD_DataDetails -->
+
+  <!-- MD_SurveyDetails -->
+
+  <element name="MD_SurveyDetails" substitutionGroup="gco:AbstractObject" type="delwp:MD_SurveyDetails_Type"/>
+
+  <complexType name="MD_SurveyDetails_PropertyType">
+    <sequence minOccurs="0">
+      <element ref="delwp:MD_SurveyDetails"/>
+    </sequence>
+    <attributeGroup ref="gco:ObjectReference"/>
+    <attribute ref="gco:nilReason"/>
+  </complexType>
+
+  <complexType name="MD_SurveyDetails_Type">
+    <complexContent>
+      <extension base="gco:AbstractObject_Type">
+        <sequence minOccurs="0">
+          <element minOccurs="0" name="aerialSurveyDetails" type="delwp:MD_AerialSurveyDetails_PropertyType"/>
+          <!-- can add other platform type specific survey details as required here -->
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <!-- END MD_SurveyDetails -->
+
+  <!-- MD_DatasetDetails -->
+
+  <element name="MD_DatasetDetails" substitutionGroup="gco:AbstractObject" type="delwp:MD_DatasetDetails_Type"/>
+
+  <complexType name="MD_DatasetDetails_PropertyType">
+    <sequence minOccurs="0">
+      <element ref="delwp:MD_DatasetDetails"/>
+    </sequence>
+    <attributeGroup ref="gco:ObjectReference"/>
+    <attribute ref="gco:nilReason"/>
+  </complexType>
+
+    <element name="MD_PlatformTypeCode" substitutionGroup="gco:CharacterString" type="gco:CodeListValue_Type"/>
+
+    <complexType name="MD_PlatformTypeCode_PropertyType">
+      <sequence minOccurs="0">
+        <element ref="delwp:MD_PlatformTypeCode"/>
+      </sequence>
+      <attribute ref="gco:nilReason"/>
+    </complexType>
+
+    <element name="platformType" type="delwp:MD_PlatformTypeCode_PropertyType">
+      <annotation>
+        <documentation>Description: Describes the type of platform that was used to collect the data. This element is used in a number of complex types</documentation>
+      </annotation>
+    </element>
+  
+    <element name="MD_AssemblyCode" substitutionGroup="gco:CharacterString" type="gco:CodeListValue_Type"/>
+
+    <complexType name="MD_AssemblyCode_PropertyType">
+      <sequence minOccurs="0">
+        <element ref="delwp:MD_AssemblyCode"/>
+      </sequence>
+      <attribute ref="gco:nilReason"/>
+    </complexType>
+
+    <element name="MD_TileSizeCode" substitutionGroup="gco:CharacterString" type="gco:CodeListValue_Type"/>
+
+    <complexType name="MD_TileSizeCode_PropertyType">
+      <sequence minOccurs="0">
+        <element ref="delwp:MD_TileSizeCode"/>
+      </sequence>
+      <attribute ref="gco:nilReason"/>
+    </complexType>
+  
+  <complexType name="MD_DatasetDetails_Type">
+    <complexContent>
+      <extension base="gco:AbstractObject_Type">
+    <sequence minOccurs="0">
+      <element ref="delwp:platformType" minOccurs="1"/> 
+      <element minOccurs="1" maxOccurs="unbounded" name="assembly" type="delwp:MD_AssemblyCode_PropertyType">
+        <annotation>
+          <documentation>Description: Describes the way in which the data has been assembled</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="1" name="tileSize" type="delwp:MD_TileSizeCode_PropertyType">
+        <annotation>
+          <documentation>Description: Describes the size of the tiles in the dataset</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="1" name="dataDetails" type="delwp:MD_DataDetails_PropertyType">
+        <annotation>
+          <documentation>Description: Describes the details of the raster data collected in this operation</documentation>
+        </annotation>
+      </element>
+      <element minOccurs="0" name="surveyDetails" type="delwp:MD_SurveyDetails_PropertyType">
+        <annotation>
+          <documentation>Description: (extra) survey details for specific platform types</documentation>
+         </annotation>
+       </element>
+    </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+
+  <!-- END MD_DatasetDetails -->
+
+  <!-- This type is used on xsi:type on mac:MI_Sensor/mac:otherProperty/gco:Record -->
+
+  <complexType name="MD_OperationProperties_Type">
+    <complexContent>
+      <extension base="gco:AbstractObject_Type">
+        <annotation>
+          <documentation>Description: Describes the DELWP operation properties that don't fit within in the standard</documentation>
+        </annotation>
+        <choice>
+           <element name="projectDetails" type="delwp:MD_ProjectDetails_PropertyType"/>
+           <element name="datasetDetails" type="delwp:MD_DatasetDetails_PropertyType"/>
+        </choice>
+      </extension> 
+    </complexContent>
+  </complexType>
+
+  <!-- This type is used on xsi:type on mac:MI_Sensor/mac:otherProperty/gco:Record -->
+
+  <complexType name="MD_SensorProperties_Type">
+    <complexContent>
+      <extension base="gco:AbstractObject_Type">
+        <sequence minOccurs="0">
+          <element ref="delwp:platformType" minOccurs="1"/> 
+        </sequence>
+      </extension> 
+    </complexContent>
+  </complexType>
+
+  <!-- Extensions for MetaShare below - column details in contentInfo -->
+
+  <!-- MD_Attribute -->
+
+  <element name="MD_Attribute" substitutionGroup="gco:AbstractObject" type="delwp:MD_Attribute_Type"/>
+
+  <!-- This type is used as the xsi:type on the 
+       mrc:MD_SampleDimension/mrc:otherProperty/gco:Record element to
+       hold column (attribute) details about MetaShare datasets -->
+
+  <complexType name="MD_Attribute_PropertyType">
+    <sequence minOccurs="0">
+      <element ref="delwp:MD_Attribute"/>
+    </sequence>
+    <attributeGroup ref="gco:ObjectReference"/>
+    <attribute ref="gco:nilReason"/>
+  </complexType>
+
+  <complexType name="MD_Attribute_Type">
+    <complexContent>
+      <extension base="gco:AbstractObject_Type">
+        <sequence minOccurs="0">
+          <element minOccurs="1" maxOccurs="1" name="name" type="gco:CharacterString_PropertyType">
+            <annotation>
+              <documentation>Description: Name of column in dataset</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="1" maxOccurs="1" name="obligation" type="gco:CharacterString_PropertyType">
+            <annotation>
+              <documentation>Description: Obligation of column in dataset</documentation>
+            </annotation>
+          </element>
+          <!-- TODO: could use gco:Boolean_PropertyType here? -->
+          <element minOccurs="1" maxOccurs="1" name="unique" type="gco:CharacterString_PropertyType">
+            <annotation>
+              <documentation>Description: Uniqueness of column in dataset</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="1" maxOccurs="1" name="dataType" type="gco:CharacterString_PropertyType">
+            <annotation>
+              <documentation>Description: Type of column in dataset</documentation>
+            </annotation>
+          </element>
+          <!-- TODO: could use gco:Integer_PropertyType here? -->
+          <element minOccurs="1" maxOccurs="1" name="dataLength" type="gco:CharacterString_PropertyType">
+            <annotation>
+              <documentation>Description: Length of column in dataset</documentation>
+            </annotation>
+          </element>
+          <!-- TODO: could use gco:Integer_PropertyType here? -->
+          <element minOccurs="0" maxOccurs="1" name="dataPrecision" type="gco:CharacterString_PropertyType">
+            <annotation>
+              <documentation>Description: Precision of column in dataset</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" maxOccurs="1" name="refTabOwnerName" type="gco:CharacterString_PropertyType">
+            <annotation>
+              <documentation>Description: Reference Table Owner Name?</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" maxOccurs="1" name="refTabTableName" type="gco:CharacterString_PropertyType">
+            <annotation>
+              <documentation>Description: Reference Table Name?</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" maxOccurs="1" name="refTabCodeColumnName" type="gco:CharacterString_PropertyType">
+            <annotation>
+              <documentation>Description: Reference Table Code Column Name?</documentation>
+            </annotation>
+          </element>
+          <element minOccurs="0" maxOccurs="1" name="comments" type="gco:CharacterString_PropertyType">
+            <annotation>
+              <documentation>Description: Comments about this dataset column</documentation>
+            </annotation>
+          </element>
+        </sequence>
+      </extension> 
+    </complexContent>
+  </complexType>
+
+</schema>
+
+
